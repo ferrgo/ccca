@@ -1,0 +1,28 @@
+{
+  "name": "ccca",
+  "version": "0.0.1",
+  "description": "Clean Code and Clean Architecture study project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ferrgo/ccca.git"
+  },
+  "keywords": [
+    "clean",
+    "code",
+    "clean",
+    "architecture",
+    "code",
+    "study",
+    "project"
+  ],
+  "author": "Hugo Gouveia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ferrgo/ccca/issues"
+  },
+  "homepage": "https://github.com/ferrgo/ccca#readme"
+}
