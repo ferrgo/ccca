@@ -7,7 +7,8 @@
     "tsc:init": "tsc --init",
     "build": "tsc",
     "test": "tsc && jest dist/",
-    "coverage": "tsc && jest ./dist --coverage"
+    "test:coverage": "tsc && jest ./dist --coverage",
+    "test:coverage:ci": "tsc && jest ./dist --silent --ci --coverage --coverageReporters='text' --coverageReporters='text-summary'"
   },
   "repository": {
     "type": "git",
