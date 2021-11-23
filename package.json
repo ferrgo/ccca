@@ -6,7 +6,8 @@
   "scripts": {
     "tsc:init": "tsc --init",
     "build": "tsc",
-    "test": "tsc && jest dist/"
+    "test": "tsc && jest dist/",
+    "coverage": "tsc && jest ./dist --coverage"
   },
   "repository": {
     "type": "git",
