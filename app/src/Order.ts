@@ -1,4 +1,5 @@
 import CPF from '../src/CPF';
+import Coupon from './Coupon';
 import Item from './Item';
 
 export default class Order {
@@ -7,6 +8,7 @@ export default class Order {
         item: Item,
         quantity: number
     }>;
+    coupon?: Coupon;
     
     constructor(cpf: string){
         this.CPF = new CPF(cpf);
@@ -21,10 +23,22 @@ export default class Order {
         return this.items.length;
     }
     
-    getTotal(): number {
+    getTotalPrice(): number {
         return this.items.reduce(
             (previous, current, _) => (previous + current.item.getPrice()*current.quantity),
             0
         )
+    }
+
+    getTotal(): number {
+        return this.getTotalPrice() - this.getTotalPrice()*this.getDiscount();
+    }
+
+    getDiscount(): number {
+        return this.coupon ? this.coupon.getDiscount() : 0;
+    };
+    
+    applyCoupon(coupon: Coupon): void {
+        this.coupon = coupon;
     }
 }
