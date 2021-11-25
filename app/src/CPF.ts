@@ -1,4 +1,11 @@
 export default class CPF {
+    value: string;
+
+    constructor(value: string){
+        if(!CPF.isValid(value)) throw new Error('Invalid CPF');
+        this.value = value;
+    }
+
     public static isValid(cpf: string): boolean {
         const strippedCpf: string = CPF.stripCPF(cpf);
         if (strippedCpf.length !== 11) return false;
