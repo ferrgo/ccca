@@ -6,7 +6,7 @@
   "scripts": {
     "tsc:init": "tsc --init",
     "build": "tsc",
-    "test": "tsc && jest dist/",
+    "test": "tsc && jest dist/ --verbose",
     "test:coverage": "tsc && jest ./dist --coverage",
     "test:coverage:ci": "tsc && jest ./dist --silent --ci --coverage --coverageReporters='text' --coverageReporters='text-summary'"
   },
@@ -25,6 +25,13 @@
   ],
   "author": "Hugo Gouveia",
   "license": "MIT",
+  "jest": {
+    "testResultsProcessor": "jest-sonar-reporter"
+  },
+
+  "jestSonar": {
+    "reportPath": "coverage"
+  },
   "bugs": {
     "url": "https://github.com/ferrgo/ccca/issues"
   },
@@ -34,6 +41,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
-    "jest": "^27.3.1"
+    "jest": "^27.3.1",
+    "jest-sonar-reporter": "^2.0.0"
   }
 }
