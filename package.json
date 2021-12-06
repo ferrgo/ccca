@@ -1,6 +1,6 @@
 {
   "name": "ccca",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Clean Code and Clean Architecture study project",
   "main": "index.js",
   "scripts": {
