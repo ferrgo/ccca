@@ -25,6 +25,11 @@
   ],
   "author": "Hugo Gouveia",
   "license": "MIT",
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testResultsProcessor": "jest-sonar-reporter"
+  },
   "jestSonar": {
     "reportPath": "coverage"
   },
