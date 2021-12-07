@@ -1,44 +1,41 @@
 import CPF from '../src/CPF';
 import Coupon from './Coupon';
 import Item from './Item';
+import Product from './Product'
 
 export default class Order {
-    CPF: CPF;
-    items: Array<{
-        item: Item,
-        quantity: number
-    }>;
-    coupon?: Coupon;
+    private readonly cpf: CPF;
+    private items: Item[] = [];
+    private coupon?: Coupon;
     
     constructor(cpf: string){
-        this.CPF = new CPF(cpf);
-        this.items = new Array;
+        this.cpf = new CPF(cpf);
     }
 
-    addItem(item: any, quantity: number): void {
-        this.items.push({item, quantity});
+    public addItem(product: Product, quantity: number): void {
+        this.items.push(new Item(product.getId(),product.getPrice(),quantity));
     }
 
-    getItemCount(): number {
+    public getItemCount(): number {
         return this.items.length;
     }
     
-    getTotalPrice(): number {
+    public getTotalPrice(): number {
         return this.items.reduce(
-            (previous, current, _) => (previous + current.item.getPrice()*current.quantity),
+            (previousValue, currentItem, _) => (previousValue + currentItem.getPrice()),
             0
         )
     }
 
-    getTotal(): number {
+    public getTotal(): number {
         return this.getTotalPrice() - this.getTotalPrice()*this.getDiscount();
     }
 
-    getDiscount(): number {
+    public getDiscount(): number {
         return this.coupon ? this.coupon.getDiscount() : 0;
-    };
+    }
     
-    applyCoupon(coupon: Coupon): void {
+    public applyCoupon(coupon: Coupon): void {
         this.coupon = coupon;
     }
 }

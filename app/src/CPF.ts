@@ -1,52 +1,52 @@
 export default class CPF {
-    value: string;
+    private readonly value: string;
 
     constructor(value: string){
-        if(!CPF.isValid(value)) throw new Error('Invalid CPF');
+        if(!this.isValid(value)) throw new Error('Invalid CPF');
         this.value = value;
     }
 
-    public static isValid(cpf: string): boolean {
-        const strippedCpf: string = CPF.stripCPF(cpf);
+    private isValid(cpf: string): boolean {
+        const strippedCpf: string = this.stripCPF(cpf);
         if (strippedCpf.length !== 11) return false;
-        if (CPF.hasAnyNaNCharacter(strippedCpf)) return false;
-        if (CPF.areAllDigitsTheSame(strippedCpf)) return false;
-        const expectedVerifyingDigits: string = CPF.calculateVerifyingDigits(strippedCpf);
-        const informedVerifyingDigits: string = CPF.getVerifyingDigits(strippedCpf);
+        if (this.hasAnyNaNCharacter(strippedCpf)) return false;
+        if (this.areAllDigitsTheSame(strippedCpf)) return false;
+        const expectedVerifyingDigits: string = this.calculateVerifyingDigits(strippedCpf);
+        const informedVerifyingDigits: string = this.getVerifyingDigits(strippedCpf);
         return informedVerifyingDigits === expectedVerifyingDigits;
     }
 
-    private static getVerifyingDigits(strippedCpf: string): string {
+    private getVerifyingDigits(strippedCpf: string): string {
         return strippedCpf.substring(strippedCpf.length - 2, strippedCpf.length);
     }
 
-    private static stripCPF(str: string): string {
-        const regexToMatchFormattingSymbols = '\\.|\\-| ';
+    private stripCPF(str: string): string {
+        const regexToMatchFormattingSymbols = '[\\.\\- ]';
         return str.replace(RegExp(regexToMatchFormattingSymbols, 'g'), '');
     }
 
-    private static areAllDigitsTheSame(str: string): boolean {
+    private areAllDigitsTheSame(str: string): boolean {
         return str.split('').every(c => c === str[0]);
     }
 
-    private static hasAnyNaNCharacter(str: string): boolean {
+    private hasAnyNaNCharacter(str: string): boolean {
         return !str.split('').every(c => !isNaN(parseInt(c)));
     }
 
-    private static calculateVerifyingDigits(strippedCpf: string): string {
-        const firstVerifyingDigit = CPF.getVerifyingDigit(strippedCpf.substr(0, 9));
+    private calculateVerifyingDigits(strippedCpf: string): string {
+        const firstVerifyingDigit = this.getVerifyingDigit(strippedCpf.substr(0, 9));
         const cpfWithFirstVerifyingDigit = strippedCpf.substr(0, 9) + firstVerifyingDigit;
-        const secondVerifyingDigit = CPF.getVerifyingDigit(cpfWithFirstVerifyingDigit);
+        const secondVerifyingDigit = this.getVerifyingDigit(cpfWithFirstVerifyingDigit);
         return '' + firstVerifyingDigit + '' + secondVerifyingDigit;
     }
 
-    private static getVerifyingDigit(str: string): string {
-        const rest = (CPF.getVerifyingSum(str) % 11);
+    private getVerifyingDigit(str: string): string {
+        const rest = (this.getVerifyingSum(str) % 11);
         const verifyingDigit = (rest < 2) ? 0 : 11 - rest;
         return verifyingDigit.toString();
     }
 
-    private static getVerifyingSum(str: string): number {
+    private getVerifyingSum(str: string): number {
         const maxFactor = str.length + 1;
         return str.split('')
             .reduce((peviousDigit, currentDigit, index) =>

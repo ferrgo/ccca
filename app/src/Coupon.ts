@@ -9,7 +9,7 @@ export default class Coupon {
         this.discount = discount;
     }
 
-    getDiscount(): number {
+    public getDiscount(): number {
         return this.discount/100;
     }
 }
